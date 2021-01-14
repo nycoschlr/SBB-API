@@ -1,0 +1,26 @@
+#Python code that asks the SBB API for the next train between a departure point and an arrival point
+
+import requests, json
+def find_next_connection(origin, destination):
+    url = 'http://transport.opendata.ch/v1/connections'
+    params = {}
+    params['from'] = origin
+    params['to'] = destination
+
+    r = requests.get(url, params = params)
+    first_conn= r.json()['connections'][0]
+    x = first_conn['to']['station']['coordinate']['x']
+    y = first_conn['to']['station']['coordinate']['y']
+    departure_timestamp = first_conn['from']['departure']
+    arrival_timestamp = first_conn['to']['arrival']
+    transport_means = first_conn['products']
+    print(departure_timestamp)
+    print(arrival_timestamp)
+    print(x)
+    print(y)
+    print(transport_means)
+    print(first_conn)
+
+    return (x, y, departure_timestamp, arrival_timestamp, transport_means)
+
+find_next_connection("Zurich", "St.Gallen")

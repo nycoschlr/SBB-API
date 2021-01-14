@@ -11,16 +11,17 @@ def find_next_connection(origin, destination):
     first_conn= r.json()['connections'][0]
     x = first_conn['to']['station']['coordinate']['x']
     y = first_conn['to']['station']['coordinate']['y']
+    duration = first_conn["duration"]
     departure_timestamp = first_conn['from']['departure']
     arrival_timestamp = first_conn['to']['arrival']
     transport_means = first_conn['products']
-    print(departure_timestamp)
-    print(arrival_timestamp)
-    print(x)
-    print(y)
+    print("Next departure time is " + departure_timestamp)
+    print("Next arrival time is " + arrival_timestamp)
     print(transport_means)
-    print(first_conn)
+    print("The duration is " + duration)
 
     return (x, y, departure_timestamp, arrival_timestamp, transport_means)
 
+
 find_next_connection("Zurich", "St.Gallen")
+
